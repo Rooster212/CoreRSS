@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreRSS", "CoreRSS\CoreRSS.csproj", "{F4A75584-F239-4CA7-A6B1-B468ABC66DEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreRSS.Tests", "CoreRSS.Tests\CoreRSS.Tests.csproj", "{847F853C-9781-4287-B023-8FCD48F77E7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F4A75584-F239-4CA7-A6B1-B468ABC66DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4A75584-F239-4CA7-A6B1-B468ABC66DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4A75584-F239-4CA7-A6B1-B468ABC66DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{847F853C-9781-4287-B023-8FCD48F77E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{847F853C-9781-4287-B023-8FCD48F77E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{847F853C-9781-4287-B023-8FCD48F77E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{847F853C-9781-4287-B023-8FCD48F77E7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
