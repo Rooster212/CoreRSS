@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace CoreRSS.Interfaces
+﻿namespace CoreRSS.Interfaces
 {
+    using System;
+
     public interface IFeedItem
     {
         string Title { get; }

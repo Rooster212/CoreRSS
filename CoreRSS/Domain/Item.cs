@@ -10,16 +10,16 @@ namespace CoreRSS.Domain
 
         public DateTime PublishDate { get; set; }
 
-        public FeedDefinition Feed { get; set; }
+        public string Link { get; set; }
 
-        public static Item CreateItem(string link, string title, string content, DateTime publishDate, FeedDefinition feed)
+        public static Item CreateItem(string title, string content, DateTime publishDate, string link)
         {
             return new Item
             {
                 Content = content,
                 Title = title,
                 PublishDate = publishDate,
-                Feed = feed
+                Link = link
             };
         }
     }

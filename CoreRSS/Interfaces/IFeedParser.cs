@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using CoreRSS.Domain;
-using CoreRSS.Interfaces;
-using System.Threading.Tasks;
-
-namespace CoreRSS
+﻿namespace CoreRSS
 {
-    interface IFeedParser
+    using global::CoreRSS.Domain;
+    using global::CoreRSS.Interfaces;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Xml.Linq;
+
+    internal interface IFeedParser
     {
         FeedType Parses { get; }
 
-        Task<IEnumerable<IFeedItem>> GetItems(FeedDefinition feed);
+        Task<IEnumerable<Item>> Items();
     }
 }
