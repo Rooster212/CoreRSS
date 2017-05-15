@@ -1,6 +1,6 @@
 ﻿namespace CoreRSS.Domain
 {
-    using System;
+    using CoreRSS.Concrete.Parsers;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -8,14 +8,16 @@
     {
         public RSSFeed(string url)
         {
-            URL = url;
+            Reader = new RSSFeedParser(url);
         }
 
-        public string URL { get; private set; }
+        private RSSFeedParser Reader { get; set; }
+
+        public string URL => Reader.URL;
         
-        public async Task<IEnumerable<Item>> Items()
+        public async Task<IEnumerable<Item>> ItemsAsync()
         {
-            throw new NotImplementedException();
+            return await Reader.ItemsAsync();
         }
     }
 }

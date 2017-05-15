@@ -6,7 +6,7 @@
 
     public static class CoreRSSCommon
     {
-        public static async Task<XDocument> RetrieveFeed(string url)
+        public static async Task<XDocument> RetrieveFeedAsync(string url)
         {
             using (var client = new HttpClient())
             {

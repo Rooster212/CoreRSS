@@ -13,15 +13,11 @@
 
         private AtomFeedParser Reader { get; set; }
 
-        public string URL {
-            get {
-                return Reader.URL;
-            }
-        }
+        public string URL => Reader.URL;
 
-        public async Task<IEnumerable<Item>> Items()
+        public async Task<IEnumerable<Item>> ItemsAsync()
         {
-            return await Reader.GetItems();
+            return await Reader.ItemsAsync();
         }
     }
 }

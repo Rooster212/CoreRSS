@@ -9,9 +9,9 @@
         private string testUrl = "http://feeds.bbci.co.uk/news/uk/rss.xml?edition=uk";
 
         [Test]
-        public async Task CanRetrieveFeed()
+        public async Task CanRetrieveFeedFromUrl()
         {
-            var feed = CoreRSSCommon.RetrieveFeed(testUrl);
+            var feed = await CoreRSSCommon.RetrieveFeedAsync(testUrl);
 
             Assert.That(feed, Is.Not.Null);
         }

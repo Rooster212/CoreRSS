@@ -1,6 +1,5 @@
 ﻿namespace CoreRSS.Domain
 {
-    using global::CoreRSS.Interfaces;
     using System;
 
     public class Feed

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace CoreRSS.Domain
+﻿namespace CoreRSS.Domain
 {
+    using System;
+
     public class Item
     {
         public string Title { get; set; }

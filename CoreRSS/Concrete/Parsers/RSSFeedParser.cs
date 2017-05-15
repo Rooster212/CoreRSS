@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using global::CoreRSS.Domain;
     using System.Threading.Tasks;
-    using System.Xml.Linq;
+    using System.Linq;
 
     public class RSSFeedParser : IFeedParser
     {
@@ -15,19 +15,22 @@
 
         public string URL { get; private set; }
 
-        public Task<IEnumerable<Item>> GetItems()
+        public async Task<IEnumerable<Item>> ItemsAsync()
         {
-            throw new NotImplementedException();
-        }
+            var doc = await CoreRSSCommon.RetrieveFeedAsync(URL);
 
-        public Task<XDocument> RetrieveFeed()
-        {
-            throw new NotImplementedException();
-        }
+            var channel = doc.Root.ElementByName("channel");
+            var entries = channel.ElementsByName("item");
 
-        public Task<IEnumerable<Item>> Items()
-        {
-            throw new NotImplementedException();
+            return entries.Select(e =>
+            {
+                var date = DateTime.Parse(e.ElementValueByName("pubDate"));
+                var content = e.ElementValueByName("description");
+                var title = e.ElementValueByName("title");
+                var link = e.ElementValueByName("link");
+
+                return Item.CreateItem(title, content, date, link);
+            });
         }
 
         public FeedType Parses => FeedType.RSS;

@@ -3,10 +3,8 @@
     using System.Collections.Generic;
     using global::CoreRSS.Domain;
     using global::CoreRSS.Concrete;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Linq;
-    using System.Xml.Linq;
     using System;
 
     public class AtomFeedParser : IFeedParser
@@ -20,9 +18,9 @@
 
         public FeedType Parses => FeedType.Atom;
 
-        public async Task<IEnumerable<Item>> GetItems()
+        public async Task<IEnumerable<Item>> ItemsAsync()
         {
-            var doc = await CoreRSSCommon.RetrieveFeed(URL);
+            var doc = await CoreRSSCommon.RetrieveFeedAsync(URL);
 
             var entries = doc.Root?.ElementsByName("entry");
 
@@ -37,23 +35,18 @@
             });
         }
 
-        public async Task<string> Id() => await RetrieveRootElementValue("id");
+        public async Task<string> GetIdAsync() => await RetrieveRootElementValueAsync("id");
 
-        public async Task<string> Link() => await RetrieveRootElementValue("link");
+        public async Task<string> GetLinkAsync() => await RetrieveRootElementValueAsync("link");
 
-        public async Task<string> Title() => await RetrieveRootElementValue("title");
+        public async Task<string> GetTitleAsync() => await RetrieveRootElementValueAsync("title");
 
-        public async Task<string> Subtitle() => await RetrieveRootElementValue("subtitle");
+        public async Task<string> GetSubtitleAsync() => await RetrieveRootElementValueAsync("subtitle");
 
-        private async Task<string> RetrieveRootElementValue(string name)
+        private async Task<string> RetrieveRootElementValueAsync(string name)
         {
-            var doc = await CoreRSSCommon.RetrieveFeed(URL);
+            var doc = await CoreRSSCommon.RetrieveFeedAsync(URL);
             return doc.Root.ElementByName(name.ToLower())?.Value;
-        }
-
-        public Task<IEnumerable<Item>> Items()
-        {
-            throw new NotImplementedException();
         }
     }
 }
