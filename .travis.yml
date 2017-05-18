@@ -5,12 +5,7 @@ dist: trusty
 sudo: required
 jobs:
   include:
-    - stage: build
-    - script:
-      - cd ./CoreRSS
-      - dotnet restore
-      - dotnet build
-    - stage: tests
+    - stage: test    
     - script: 
       - cd ./CoreRSS.Tests
       - dotnet restore
