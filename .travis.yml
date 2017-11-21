@@ -1,14 +1,20 @@
 language: csharp
 solution: CoreRSS.sln
-mono: none
-dotnet: 1.0.1
 dist: trusty
 sudo: required
+
+mono: none
+
+dotnet:
+  - latest
+  - 1.0.1
+
+script: dotnet restore
+
 jobs:
   include:
     - stage: test
-    - script: 
+    - script:
       - cd ./CoreRSS.Tests
-      - dotnet restore
       - dotnet build
       - dotnet test
