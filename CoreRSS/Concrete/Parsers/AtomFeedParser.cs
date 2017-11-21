@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using System.Linq;
     using System;
+    using System.Xml.Linq;
 
     public class AtomFeedParser : IFeedParser
     {
@@ -20,19 +21,25 @@
 
         public async Task<IEnumerable<Item>> ItemsAsync()
         {
-            var doc = await CoreRSSCommon.RetrieveFeedAsync(URL);
-
-            var entries = doc.Root?.ElementsByName("entry");
-
-            return entries.Select(e =>
+            using (var streamRetriever = new RemoteFeedStreamRetriever())
             {
-                var date = DateTime.Parse(e.ElementValueByName("published"));
-                var content = e.ElementValueByName("content");
-                var title = e.ElementValueByName("title");
-                var link = e.ElementByName("link")?.Attribute("href")?.Value;
+                var stream = await streamRetriever.GetStreamForUrlAsync(URL);
 
-                return Item.CreateItem(title, content, date, link);
-            });
+                var doc = XDocument.Load(stream);
+
+                var channel = doc.Root.ElementByName("");
+                var entries = channel.ElementsByName("");
+
+                return entries.Select(e =>
+                {
+                    var date = DateTime.Parse(e.ElementValueByName("published"));
+                    var content = e.ElementValueByName("content");
+                    var title = e.ElementValueByName("title");
+                    var link = e.ElementByName("link")?.Attribute("href")?.Value;
+
+                    return Item.CreateItem(title, content, date, link);
+                });
+            }
         }
 
         public async Task<string> GetIdAsync() => await RetrieveRootElementValueAsync("id");
@@ -45,8 +52,12 @@
 
         private async Task<string> RetrieveRootElementValueAsync(string name)
         {
-            var doc = await CoreRSSCommon.RetrieveFeedAsync(URL);
-            return doc.Root.ElementByName(name.ToLower())?.Value;
+            using (var streamRetriever = new RemoteFeedStreamRetriever())
+            {
+                var stream = await streamRetriever.GetStreamForUrlAsync(URL);
+                var doc = XDocument.Load(stream);
+                return doc.Root.ElementValueByName(name);
+            }
         }
     }
 }
