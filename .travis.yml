@@ -7,12 +7,22 @@ mono: none
 
 dotnet: 1.0.1
 
-script: dotnet restore
+install: dotnet restore
 
-jobs:
+script:
+  - cd ./CoreRSS.Tests
+  - dotnet build
+  - dotnet test
+
+matrix:
   include:
-    - stage: test
-    - script:
-      - cd ./CoreRSS.Tests
-      - dotnet build
-      - dotnet test
+    - dotnet: 1.0.1
+      mono: none
+      dist: trusty
+    - dotnet: 1.1.5
+      mono: none
+      dist: trusty
+    - dotnet: 2.0.3
+      mono: none
+      dist: trusty
+    - mono: latest
