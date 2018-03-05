@@ -10,9 +10,6 @@ script:
 
 matrix:
   include:
-    - dotnet: 1.0.1
-      mono: none
-      dist: trusty
     - dotnet: 1.1.5
       mono: none
       dist: trusty
