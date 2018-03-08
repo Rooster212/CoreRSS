@@ -1,0 +1,22 @@
+language: csharp
+solution: CoreRSS.sln
+
+install: dotnet restore
+
+script:
+  - cd ./CoreRSS.Tests
+  - dotnet build
+  - dotnet test
+
+matrix:
+  include:
+    - dotnet: 1.1.5
+      mono: none
+      env: DOTNETCORE=1
+      dist: trusty
+    # - dotnet: 2.0.3
+    #   mono: none
+    #   dist: trusty
+    # - mono: latest
+    #   dist: trusty
+    #   env: MONO=1
